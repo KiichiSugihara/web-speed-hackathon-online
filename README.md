@@ -74,3 +74,5 @@ $ yarn build
 ```bash
 $ yarn serve
 ```
+
+### 補足
