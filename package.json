@@ -52,7 +52,7 @@
     "@zendeskgarden/css-buttons": "^7.0.19",
     "@zendeskgarden/css-forms": "^7.0.20",
     "@zendeskgarden/css-utilities": "^4.5.5",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "axios-mock-adapter": "^1.18.1",
     "classnames": "^2.2.6",
     "core-js": "^3.6.4",
