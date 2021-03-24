@@ -1,5 +1,8 @@
 name: Build project and run Lighthouse CI
-on: [push]
+on:
+  pull_request:
+    branches:
+      - 'user/KiichiSugihara'
 jobs:
   lhci:
     name: Lighthouse CI
@@ -10,12 +13,21 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 13.11.0
-      - name: npm install
-        run: |
-          npm install
+      - name: Get yarn cache
+        id: yarn-cache
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.yarn-cache.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - name: Install Packages
+        run: yarn install --frozen-lockfile
       - name: app Build
         run: |
-          npm run build
+          yarn run build
       - name: run Lighthouse CI
         run: |
           npm install -g @lhci/cli@0.3.x
